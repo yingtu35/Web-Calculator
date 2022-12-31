@@ -1,0 +1,56 @@
+<!--Created by Ying Tu-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <link rel="stylesheet" type="text/css" href=".\style\style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Caclulator</h1>
+        </header>
+        <main>
+            <p>Handle any arithmetic calculations as you wish!</p>
+            <div class="calculator">
+                <canvas id="canvas" width="335" height="80"></canvas>
+                <br>
+                <button id="ACBtn" class="operator" onclick="clearExp()">AC</button>
+                <button id="leftPBtn" class="operator" onclick="addExp('left')">(</button>
+                <button id="rightPBtn" class="operator" onclick="addExp('right')">)</button>
+                <button id="eraseBtn" class="operator" onclick="subExp()">←</button>
+                <br>
+                <button id="7Btn" class="operand" onclick="addExp('7')">7</button>
+                <button id="8Btn" class="operand" onclick="addExp('8')">8</button>
+                <button id="9Btn" class="operand" onclick="addExp('9')">9</button>
+                <button id="divBtn" class="operator" onclick="addExp('/')">/</button>
+                <br>
+                <button id="4Btn" class="operand" onclick="addExp('4')">4</button>
+                <button id="5Btn" class="operand" onclick="addExp('5')">5</button>
+                <button id="6Btn" class="operand" onclick="addExp('6')">6</button>
+                <button id="mulBtn" class="operator" onclick="addExp('*')">*</button>
+                <br>
+                <button id="1Btn" class="operand" onclick="addExp('1')">1</button>
+                <button id="2Btn" class="operand" onclick="addExp('2')">2</button>
+                <button id="3Btn" class="operand" onclick="addExp('3')">3</button>
+                <button id="subBtn" class="operator" onclick="addExp('-')">-</button>
+                <br>
+                <button id="0Btn" class="operand" onclick="addExp('0')">0</button>
+                <button id="dotBtn" class="operand">.</button>
+                <button id="equalBtn" class="equal-operator" onclick="calExp()">=</button>
+                <button id="addBtn" class="operator" onclick="addExp('+')">+</button>
+                <br>
+            </div>
+            <script src=".\script\logic.js"></script>
+        </main>
+        <br>
+        <br>
+        <br>
+        <br>
+        <footer>
+            Created by Ying Tu
+            <br>
+            <a href="http://www.linkedin.com/in/yingtu">Linkedin</a>
+            <a href="http://www.github.com/yingtu35">GitHub</a>
+        </footer>
+    </body>
+</html>

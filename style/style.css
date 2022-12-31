@@ -1,0 +1,62 @@
+body {
+    text-align: center;
+    background-color: lightblue;
+}
+
+/* .calculator {
+} */
+
+canvas {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+button {
+    width: 80px;
+    height: 50px;
+    margin: 2px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.operand {
+    background-color: ivory;
+}
+
+.operand:hover {
+    background-color: rgba(255, 255, 240, 0.75);
+}
+
+.operand:active {
+    background-color: ivory;
+}
+
+.operator {
+    background-color: rgb(196, 196, 196);
+}
+
+/* Applied when the button is hovered by the cursor */
+.operator:hover {
+    background-color: gray;
+}
+
+/* Applied when the button is clicked */
+.operator:active {
+    background-color: rgb(196, 196, 196);
+}
+
+.equal-operator {
+    background-color: orange;
+}
+
+.equal-operator:hover {
+    background-color: rgb(255, 196, 87);
+}
+
+.equal-operator:active {
+    background-color: orange;
+}
