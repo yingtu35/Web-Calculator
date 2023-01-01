@@ -9,14 +9,17 @@
         <header>
             <h1>Caclulator</h1>
         </header>
-        <main>
+        <section class="description">
             <p>Handle any arithmetic calculations as you wish!</p>
-            <div class="calculator">
-                <canvas id="canvas" width="335" height="80"></canvas>
-                <br>
+        </section>
+        <div class="calculator">
+            <div id="screen">
+                <p id="number">0</p>
+            </div>
+            <div id="key">
                 <button id="ACBtn" class="operator" onclick="clearExp()">AC</button>
-                <button id="leftPBtn" class="operator" onclick="addExp('left')">(</button>
-                <button id="rightPBtn" class="operator" onclick="addExp('right')">)</button>
+                <button id="minusBtn" class="operator" onclick="addExp('minus')">+/-</button>
+                <button id="percentBtn" class="operator" onclick="addExp('percent')">%</button>
                 <button id="eraseBtn" class="operator" onclick="subExp()">←</button>
                 <br>
                 <button id="7Btn" class="operand" onclick="addExp('7')">7</button>
@@ -36,12 +39,16 @@
                 <br>
                 <button id="0Btn" class="operand" onclick="addExp('0')">0</button>
                 <button id="dotBtn" class="operand">.</button>
-                <button id="equalBtn" class="equal-operator" onclick="calExp()">=</button>
+                <button id="equalBtn" class="equal-operator" onclick="equalExp()">=</button>
                 <button id="addBtn" class="operator" onclick="addExp('+')">+</button>
-                <br>
             </div>
-            <script src=".\script\logic.js"></script>
-        </main>
+        </div>
+        <script
+            src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+            crossorigin="anonymous">
+        </script>
+        <script src="script\logic.js"></script>
         <br>
         <br>
         <br>

@@ -3,19 +3,46 @@ body {
     background-color: lightblue;
 }
 
-/* .calculator {
-} */
+header {
+    color: #FFFFFF;
+    background-color: #284b63;
+    padding: 20px 0;
+}
 
-canvas {
+.description p {
+    font-size: 26px;
+}
+
+.calculator {
+    display: inline-block;
+    width: 40%;
+}
+
+#screen {
+    width: 50%;
+    display: inline-block;
+    margin: 2px 0;
     border: 2px solid black;
     border-radius: 10px;
     background-color: white;
 }
 
+#screen p{
+    text-align: right;
+    margin: auto;
+    font-size: 50px;
+    font-weight: 900;
+    padding-right: 2%;
+}
+#key {
+    width: 50%;
+    display: inline-block;
+}
+
 button {
-    width: 80px;
+    width: 23%;
     height: 50px;
-    margin: 2px;
+    margin: 0.5%;
     border: 2px solid black;
     border-radius: 10px;
     font-size: 18px;
@@ -59,4 +86,21 @@ button {
 
 .equal-operator:active {
     background-color: orange;
+}
+
+footer {
+    background: #353535;
+    padding: 32px 0;
+    color: #868686;
+    font-size: 18px;
+}
+
+footer a {
+    padding: 4px;
+    text-decoration: none;
+    color: #c3c3c3;
+}
+
+footer a:hover {
+    color: #ffffff;
 }
