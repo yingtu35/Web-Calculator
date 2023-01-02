@@ -2,201 +2,156 @@
 /* Thanks for checking out my project! */
 /* Welcome to also visit my Linkedin and Github page */
 /* Links are at the bottom of the game */
-/* v1.0: cannot handle parentheses, expression after equal is pressed, decimals */
 
 /* hold the user input expression */
-let previous_expr = "";
-let current_expr = "0";
+let prev_expr = "";
+let curr_expr = "0";
 let temp_expr = "";
-let operator = "";
-let new_number = true;
-let result_exp = false;
-let TogglePercentBackspace = false;
+let op = "";
+
+/* initial state of the calculator, used for calculator logics */
+let waitForSecondExpr = true;
+let resultExp = false;
+let TogglePercentBackspaceDot = false;
 
 /* regular expression to validate the mathematic expression */
 const re = /(?:(?:^|[-+_*/])(?:\s*-?\d+(\.\d+)?(?:[eE][+-]?\d+)?\s*))+$/;
 
+/* display the current expression on the screen */
 function display() {
-    current_expr = current_expr.slice(0,13);
-    $("#screen p").html(current_expr);
+    /* exists display problem when number of decimal is large */
+    var expr = curr_expr.slice(0,13);
+    $("#screen p").html(expr);
 
     /* for checking */
-    $("#checker .previous_expr span").html(previous_expr);
-    $("#checker .current_expr span").html(current_expr);
-    $("#checker .temp_expr span").html(temp_expr);
-    $("#checker .operator span").html(operator);
-    $("#checker .new_number span").html(new_number.toString());
-    $("#checker .result_exp span").html(result_exp.toString());
-    $("#checker .TogglePercentBackspace span").html(TogglePercentBackspace.toString());
+    // $("#checker .prev_expr span").html(prev_expr);
+    // $("#checker .curr_expr span").html(curr_expr);
+    // $("#checker .temp_expr span").html(temp_expr);
+    // $("#checker .op span").html(op);
+    // $("#checker .waitForSecondExpr span").html(waitForSecondExpr.toString());
+    // $("#checker .resultExp span").html(resultExp.toString());
+    // $("#checker .TogglePercentBackspaceDot span").html(TogglePercentBackspaceDot.toString());
 }
+
+/* reset the calculator to the initial state */
 function clearExp() {
-    previous_expr = "";
-    current_expr = "0";
+    prev_expr = "";
+    curr_expr = "0";
     temp_expr = "0";
-    operator = "";
-    new_number = true;
-    result_exp = false;
-    TogglePercentBackspace = false;
+    op = "";
+    waitForSecondExpr = true;
+    resultExp = false;
+    TogglePercentBackspaceDot = false;
     display();
 }
 
-function addExp(parameter) {
-    switch (parameter) {
-        /* deadlock encounters when pressing "minus" */
-        // case 'minus':
-        //     if (current_expr.charAt(0) === "-") {
-        //         current_expr = current_expr.slice(1,);
-                
-        //     }else{
-        //         current_expr = "-" + current_expr;
-        //     }
-        //     temp_expr = current_expr;
-        //     new_number = false;
-        //     result_exp = false;
-        //     TogglePercentBackspace = false;
-        //     alert("executed");
-        //     break;
-        // case 'percent':
-        //     current_expr = 0.01 * Number(current_expr);
-        //     current_expr = current_expr.toString();
-        //     TogglePercentBackspace = false;
-        //     break;
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-            /* exist logic error when pressed toggle/percent/backspace and then +-*/
-            if (TogglePercentBackspace) {
-                // previous_expr = current_expr;
-                TogglePercentBackspace = false;
-            }
-
-            if (!new_number) {
-                // var temp = current_expr;
-                if (operator){
-                    current_expr = calExp(previous_expr, current_expr, operator);
-                }
-                // alert(current_expr);
-                // operator = parameter;
-                previous_expr = current_expr;
-                // alert(current_expr);
-                
-                // current_expr += parameter;
-                new_number = true;
-            }
-            operator = parameter;
-            temp_expr = "0";
-            TogglePercentBackspace = false;
-            result_exp = false;
-            break;
-        default:
-            if (result_exp){
-                previous_expr = "0";
-                temp_expr = "0";
-                result_exp = false;
-            }
-
-            // }else{
-            //     previous_expr = current_expr;
-            // }
-            if (TogglePercentBackspace) {
-                // previous_expr = current_expr;
-                current_expr += parameter;
-                // TogglePercentBackspace = false;
-            }
-            else if (current_expr === "0" || new_number){
-                // previous_expr = current_expr;
-                current_expr = parameter;
-                new_number = false;
-            }
-            else if (current_expr === "-0") {
-                current_expr = "-" + parameter;
-            }
-            else{
-                current_expr += parameter;
-            }
-            temp_expr = "0"? parameter: temp_expr + parameter;
-            result_exp = false;
-            break;
+/* handle number inputs */
+function numExp(num) {
+    if (resultExp){
+        prev_expr = "";
+        temp_expr = "0";
+        op = "";
     }
+
+    if (TogglePercentBackspaceDot) {
+        curr_expr += num;
+    }
+    else if (curr_expr === "0" || waitForSecondExpr){
+        curr_expr = num;
+        waitForSecondExpr = false;
+    }
+    else if (curr_expr === "-0") {
+        curr_expr = "-" + num;
+    }
+    else{
+        curr_expr += num;
+    }
+    temp_expr = curr_expr;
+
+    resultExp = false;
     display();
 }
 
+/* handle "+, -, *, /" operator inputs, do calculation if necessary */
+function opExp(operator) {
+    if (!waitForSecondExpr) {
+        if (op) {
+            curr_expr = calExp(prev_expr, curr_expr, op);
+        }
+        waitForSecondExpr = true;
+    }
+    prev_expr = curr_expr;
+    op = operator;
+
+    TogglePercentBackspaceDot = false;
+    resultExp = false;
+    display();
+}
+
+/* handle "+/-" input */
 function minusExp() {
-    if (current_expr.charAt(0) === "-") {
-        current_expr = current_expr.slice(1,);
-        
+    if (curr_expr.charAt(0) === "-") {
+        curr_expr = curr_expr.slice(1,);
     }else{
-        current_expr = "-" + current_expr;
+        curr_expr = "-" + curr_expr;
     }
-    temp_expr = current_expr;
-    TogglePercentBackspace = true;
-    if (new_number === true) {
-        previous_expr = current_expr;
-    }
-    // result_exp = false;
+
+    TogglePercentBackspaceDot = true;
     display();
 }
 
+/* handle "%" input */
 function percentExp() {
-    current_expr = 0.01 * Number(current_expr);
-    current_expr = current_expr.toString();
-    TogglePercentBackspace = true;
-    if (new_number === true) {
-        previous_expr = current_expr;
-    }
-    // result_exp = false;
+    /* ---------could leads to many 0 after the decimal----------- */
+    curr_expr = 0.01 * Number(curr_expr);
+    /* ---------could leads to many 0 after the decimal----------- */
+    curr_expr = curr_expr.toString();
+    TogglePercentBackspaceDot = true;
     display();
 }
 
-function subExp() {
-    var expr = current_expr.toString();
-    if (expr.length !== 1) {
-        expr = expr.slice(0, -1);
-        TogglePercentBackspace = true;
+/* handle "<-" input */
+function backspaceExp() {
+    if (curr_expr.length !== 1) {
+        curr_expr = curr_expr.slice(0, -1);
+        TogglePercentBackspaceDot = true;
     }else {
-        expr = "0";
-        TogglePercentBackspace = false;
+        curr_expr = "0";
+        TogglePercentBackspaceDot = false;
     }
-    current_expr = expr;
-    temp_expr = current_expr;
-    if (new_number === true) {
-        previous_expr = current_expr;
-    }
-    // result_exp = false;
     display();
 }
 
-/* produce error when directly press equal */
+/* handle "." input */
 function dotExp() {
-    current_expr += ".";
-    temp_expr = current_expr;
-    new_number = false;
-    result_exp = false;
-    TogglePercentBackspace = false;
-    display();
-}
-
-function equalExp() {
-    if (result_exp){
-        // alert(current_expr);
-        // alert(temp_expr);
-        current_expr = calExp(current_expr, temp_expr, operator);
-    }else{
-        temp_expr = current_expr;
-        current_expr = calExp(previous_expr, current_expr, operator);
-        result_exp = true;
+    if (!curr_expr.includes(".")) {
+        curr_expr += ".";
     }
-    previous_expr = current_expr;
-    new_number = true;
-    TogglePercentBackspace = false;
+
+    TogglePercentBackspaceDot = true;
     display();
 }
 
-function calExp(expr1, expr2, op) {
-    // result_exp = true;
-    var expr = checkDecimal(expr1) + op + checkDecimal(expr2);
-    // alert(checkDecimal(expr1) + op + checkDecimal(expr2));
+/* handle "=" input, execute the calculation */
+function equalExp() {
+    if (resultExp){
+        curr_expr = calExp(curr_expr, temp_expr, op);
+    }else{
+        temp_expr = curr_expr;
+        curr_expr = calExp(prev_expr, curr_expr, op);
+        resultExp = true;
+    }
+    prev_expr = curr_expr;
+
+    waitForSecondExpr = true;
+    TogglePercentBackspaceDot = false;
+    display();
+}
+
+/* this function does the calculation by using Function */
+function calExp(expr1, expr2, operator) {
+    var expr = checkDecimal(expr1) + operator + checkDecimal(expr2);
+
     if (isValidMathExpression(expr)){
         var func = new Function("return " + expr);
         expr = func();
@@ -206,10 +161,12 @@ function calExp(expr1, expr2, op) {
     return expr.toString();
 }
 
+/* validate the given math expression */
 function isValidMathExpression(expr){
     return re.test(expr);
 }
 
+/* add "0" to the end of the expression to be a proper decimal number*/
 function checkDecimal(expr) {
     if (expr.charAt(expr.length-1) === ".") {
         return expr + "0";

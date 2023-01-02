@@ -1,4 +1,7 @@
 <!--Created by Ying Tu-->
+<!--Thanks for checking out my project! -->
+<!--Welcome to also visit my Linkedin and Github page -->
+<!-- Links are at the bottom of the game -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,40 +23,40 @@
                 <button id="ACBtn" class="operator" onclick="clearExp()">AC</button>
                 <button id="minusBtn" class="operator" onclick="minusExp()">+/-</button>
                 <button id="percentBtn" class="operator" onclick="percentExp()">%</button>
-                <button id="eraseBtn" class="operator" onclick="subExp()">←</button>
+                <button id="backspaceBtn" class="operator" onclick="backspaceExp()">←</button>
                 <br>
-                <button id="7Btn" class="operand" onclick="addExp('7')">7</button>
-                <button id="8Btn" class="operand" onclick="addExp('8')">8</button>
-                <button id="9Btn" class="operand" onclick="addExp('9')">9</button>
-                <button id="divBtn" class="operator" onclick="addExp('/')">/</button>
+                <button id="7Btn" class="operand" onclick="numExp('7')">7</button>
+                <button id="8Btn" class="operand" onclick="numExp('8')">8</button>
+                <button id="9Btn" class="operand" onclick="numExp('9')">9</button>
+                <button id="divBtn" class="operator" onclick="opExp('/')">/</button>
                 <br>
-                <button id="4Btn" class="operand" onclick="addExp('4')">4</button>
-                <button id="5Btn" class="operand" onclick="addExp('5')">5</button>
-                <button id="6Btn" class="operand" onclick="addExp('6')">6</button>
-                <button id="mulBtn" class="operator" onclick="addExp('*')">*</button>
+                <button id="4Btn" class="operand" onclick="numExp('4')">4</button>
+                <button id="5Btn" class="operand" onclick="numExp('5')">5</button>
+                <button id="6Btn" class="operand" onclick="numExp('6')">6</button>
+                <button id="mulBtn" class="operator" onclick="opExp('*')">*</button>
                 <br>
-                <button id="1Btn" class="operand" onclick="addExp('1')">1</button>
-                <button id="2Btn" class="operand" onclick="addExp('2')">2</button>
-                <button id="3Btn" class="operand" onclick="addExp('3')">3</button>
-                <button id="subBtn" class="operator" onclick="addExp('-')">-</button>
+                <button id="1Btn" class="operand" onclick="numExp('1')">1</button>
+                <button id="2Btn" class="operand" onclick="numExp('2')">2</button>
+                <button id="3Btn" class="operand" onclick="numExp('3')">3</button>
+                <button id="subBtn" class="operator" onclick="opExp('-')">-</button>
                 <br>
-                <button id="0Btn" class="operand" onclick="addExp('0')">0</button>
+                <button id="0Btn" class="operand" onclick="numExp('0')">0</button>
                 <button id="dotBtn" class="operand" onclick="dotExp()">.</button>
                 <button id="equalBtn" class="equal-operator" onclick="equalExp()">=</button>
-                <button id="addBtn" class="operator" onclick="addExp('+')">+</button>
+                <button id="addBtn" class="operator" onclick="opExp('+')">+</button>
             </div>
         </div>
-        <div id="checker">
+        <!-- <div id="checker">
             <ul>
-                <li class="previous_expr">previous_expr: <span>0</span></li>
-                <li class="current_expr">current_expr: <span>0</span></li>
+                <li class="prev_expr">prev_expr: <span>0</span></li>
+                <li class="curr_expr">curr_expr: <span>0</span></li>
                 <li class="temp_expr">temp_expr: <span>0</span></li>
-                <li class="operator">operator: <span>0</span></li>
-                <li class="new_number">new_number: <span>true</span></li>
-                <li class="result_exp">result_exp: <span>false</span></li>
-                <li class="TogglePercentBackspace">TogglePercentBackspace: <span>false</span></li>
+                <li class="op">op: <span>0</span></li>
+                <li class="waitForSecondExpr">waitForSecondExpr: <span>true</span></li>
+                <li class="resultExp">resultExp: <span>false</span></li>
+                <li class="TogglePercentBackspaceDot">TogglePercentBackspaceDot: <span>false</span></li>
             </ul>
-        </div>
+        </div> -->
         <script
             src="https://code.jquery.com/jquery-3.6.3.js"
             integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
