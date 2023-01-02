@@ -18,8 +18,8 @@
             </div>
             <div id="key">
                 <button id="ACBtn" class="operator" onclick="clearExp()">AC</button>
-                <button id="minusBtn" class="operator" onclick="addExp('minus')">+/-</button>
-                <button id="percentBtn" class="operator" onclick="addExp('percent')">%</button>
+                <button id="minusBtn" class="operator" onclick="minusExp()">+/-</button>
+                <button id="percentBtn" class="operator" onclick="percentExp()">%</button>
                 <button id="eraseBtn" class="operator" onclick="subExp()">←</button>
                 <br>
                 <button id="7Btn" class="operand" onclick="addExp('7')">7</button>
@@ -51,7 +51,7 @@
                 <li class="operator">operator: <span>0</span></li>
                 <li class="new_number">new_number: <span>true</span></li>
                 <li class="result_exp">result_exp: <span>false</span></li>
-                <li class="is_backspace">is_backspace: <span>false</span></li>
+                <li class="TogglePercentBackspace">TogglePercentBackspace: <span>false</span></li>
             </ul>
         </div>
         <script

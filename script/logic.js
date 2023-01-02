@@ -11,40 +11,11 @@ let temp_expr = "";
 let operator = "";
 let new_number = true;
 let result_exp = false;
-let is_backspace = false;
+let TogglePercentBackspace = false;
 
-/* validate the expression */
+/* regular expression to validate the mathematic expression */
 const re = /(?:(?:^|[-+_*/])(?:\s*-?\d+(\.\d+)?(?:[eE][+-]?\d+)?\s*))+$/;
 
-// /* properties for the expression shown on the screen */
-// font = "bold 70px Arial";
-// font_color = "black";
-
-// /* logic of the calculator */
-// window.onload = function () {
-//     const canvas = document.getElementById("canvas");
-//     width = canvas.width;
-//     height = canvas.height;
-
-//     let context =canvas.getContext("2d");
-//     context.font = font;
-//     context.fillStyle=font_color;
-
-//     /* draw the expression on the canvas */
-//     function draw(currentTime) {
-//         context.clearRect(0,0,width,height);
-		
-//         context.beginPath();
-//         context.fillText(current_expr,0,65);
-//         // context.fillText(current_expr,width- 2 - 39*(current_expr.length),65);
-
-//         window.requestAnimationFrame(draw);
-//    }
-//     /* handle all button click events */
-
-//     window.requestAnimationFrame(draw);
-
-// }
 function display() {
     current_expr = current_expr.slice(0,13);
     $("#screen p").html(current_expr);
@@ -56,7 +27,7 @@ function display() {
     $("#checker .operator span").html(operator);
     $("#checker .new_number span").html(new_number.toString());
     $("#checker .result_exp span").html(result_exp.toString());
-    $("#checker .is_backspace span").html(is_backspace.toString());
+    $("#checker .TogglePercentBackspace span").html(TogglePercentBackspace.toString());
 }
 function clearExp() {
     previous_expr = "";
@@ -65,38 +36,39 @@ function clearExp() {
     operator = "";
     new_number = true;
     result_exp = false;
-    is_backspace = false;
+    TogglePercentBackspace = false;
     display();
 }
 
 function addExp(parameter) {
     switch (parameter) {
         /* deadlock encounters when pressing "minus" */
-        case 'minus':
-            if (current_expr.charAt(0) === "-") {
-                current_expr = current_expr.slice(1,);
+        // case 'minus':
+        //     if (current_expr.charAt(0) === "-") {
+        //         current_expr = current_expr.slice(1,);
                 
-            }else{
-                current_expr = "-" + current_expr;
-            }
-            temp_expr = current_expr;
-            new_number = false;
-            result_exp = false;
-            is_backspace = false;
-            alert("executed");
-            break;
-        case 'percent':
-            current_expr = 0.01 * Number(current_expr);
-            current_expr = current_expr.toString();
-            is_backspace = false;
-            break;
+        //     }else{
+        //         current_expr = "-" + current_expr;
+        //     }
+        //     temp_expr = current_expr;
+        //     new_number = false;
+        //     result_exp = false;
+        //     TogglePercentBackspace = false;
+        //     alert("executed");
+        //     break;
+        // case 'percent':
+        //     current_expr = 0.01 * Number(current_expr);
+        //     current_expr = current_expr.toString();
+        //     TogglePercentBackspace = false;
+        //     break;
         case '+':
         case '-':
         case '*':
         case '/':
-            if (is_backspace) {
-                previous_expr = current_expr;
-                is_backspace = false;
+            /* exist logic error when pressed toggle/percent/backspace and then +-*/
+            if (TogglePercentBackspace) {
+                // previous_expr = current_expr;
+                TogglePercentBackspace = false;
             }
 
             if (!new_number) {
@@ -114,7 +86,7 @@ function addExp(parameter) {
             }
             operator = parameter;
             temp_expr = "0";
-            is_backspace = false;
+            TogglePercentBackspace = false;
             result_exp = false;
             break;
         default:
@@ -127,10 +99,10 @@ function addExp(parameter) {
             // }else{
             //     previous_expr = current_expr;
             // }
-            if (is_backspace) {
+            if (TogglePercentBackspace) {
                 // previous_expr = current_expr;
                 current_expr += parameter;
-                // is_backspace = false;
+                // TogglePercentBackspace = false;
             }
             else if (current_expr === "0" || new_number){
                 // previous_expr = current_expr;
@@ -150,18 +122,48 @@ function addExp(parameter) {
     display();
 }
 
+function minusExp() {
+    if (current_expr.charAt(0) === "-") {
+        current_expr = current_expr.slice(1,);
+        
+    }else{
+        current_expr = "-" + current_expr;
+    }
+    temp_expr = current_expr;
+    TogglePercentBackspace = true;
+    if (new_number === true) {
+        previous_expr = current_expr;
+    }
+    // result_exp = false;
+    display();
+}
+
+function percentExp() {
+    current_expr = 0.01 * Number(current_expr);
+    current_expr = current_expr.toString();
+    TogglePercentBackspace = true;
+    if (new_number === true) {
+        previous_expr = current_expr;
+    }
+    // result_exp = false;
+    display();
+}
+
 function subExp() {
     var expr = current_expr.toString();
     if (expr.length !== 1) {
         expr = expr.slice(0, -1);
-        is_backspace = true;
+        TogglePercentBackspace = true;
     }else {
         expr = "0";
-        is_backspace = false;
+        TogglePercentBackspace = false;
     }
     current_expr = expr;
     temp_expr = current_expr;
-    result_exp = false;
+    if (new_number === true) {
+        previous_expr = current_expr;
+    }
+    // result_exp = false;
     display();
 }
 
@@ -171,7 +173,7 @@ function dotExp() {
     temp_expr = current_expr;
     new_number = false;
     result_exp = false;
-    is_backspace = false;
+    TogglePercentBackspace = false;
     display();
 }
 
@@ -187,7 +189,7 @@ function equalExp() {
     }
     previous_expr = current_expr;
     new_number = true;
-    is_backspace = false;
+    TogglePercentBackspace = false;
     display();
 }
 
