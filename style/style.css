@@ -2,6 +2,9 @@
 /* Thanks for checking out my project! */
 /* Welcome to also visit my Linkedin and Github page */
 /* Links are at the bottom of the game */
+html {
+    font-size: 16px;
+}
 body {
     text-align: center;
     background-color: lightblue;
@@ -14,18 +17,18 @@ header {
 }
 
 .description p {
-    font-size: 26px;
+    font-size: 1.5rem;
 }
 
 .calculator {
     display: inline-block;
-    width: 40%;
+    width: 50%;
 }
 
 #screen {
-    width: 50%;
+    width: 47%;
     display: inline-block;
-    margin: 2px 0;
+    margin: 0.5% 2%;
     border: 2px solid black;
     border-radius: 10px;
     background-color: white;
@@ -34,26 +37,27 @@ header {
 #screen p{
     text-align: right;
     margin: auto;
-    font-size: 50px;
+    font-size: 3rem;
     font-weight: 900;
     padding-right: 2%;
 }
 #key {
     width: 50%;
+    /* height: 100%; */
     display: inline-block;
 }
 
 button {
-    width: 23%;
-    height: 50px;
+    display: inline-block;
+    width: 22%;
+    height: 3.5rem;
     margin: 0.5%;
     border: 2px solid black;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
 }
-
 .operand {
     background-color: ivory;
 }
@@ -94,13 +98,13 @@ button {
 
 footer {
     background: #353535;
-    padding: 32px 0;
+    padding: 2rem 0;
     color: #868686;
-    font-size: 18px;
+    font-size: 1.2rem;
 }
 
 footer a {
-    padding: 4px;
+    padding: 0.5rem;
     text-decoration: none;
     color: #c3c3c3;
 }
