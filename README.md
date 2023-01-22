@@ -1,6 +1,7 @@
 # Web-Calculator
 
 ## A calculator that does all the calculations (at least arithmetic parts)
+![calculator](https://user-images.githubusercontent.com/91551415/213914899-9ca109a3-cd7f-40c6-bdb0-44bc9bf9025a.PNG)
 
 ### Description
 This web calculator is a personal side project.\
